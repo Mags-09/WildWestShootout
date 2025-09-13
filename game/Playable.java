@@ -34,9 +34,31 @@ public class Playable extends Polygon implements KeyListener{
 		this.rateMov = GRID_SIZE;
 		this.lastMovTime = System.currentTimeMillis();
 		this.bullets = new ArrayList<Bullet>();
-		playerSprite = new ImageIcon("src/images/piskel_bush.png").getImage();
+		playerSprite = new ImageIcon("src/WildWesterner-1.png (1)-1.png.png").getImage();
 	}
 	
+	public void paint(Graphics brush) {
+		brush.setColor(Color.blue);
+
+		int[] xPoints = new int[shape.length];
+		int[] yPoints = new int[shape.length];
+
+		Point[] points = this.getPoints();
+
+		for (int i = 0; i < shape.length; i++) {
+			xPoints[i] = (int) points[i].x;
+			yPoints[i] = (int) points[i].y;
+		}
+
+		brush.fillPolygon(xPoints, yPoints, shape.length);
+		brush.drawImage(playerSprite, (int) this.position.x, (int) this.position.y, null);
+
+		for (Bullet bullet : bullets) {
+			bullet.paint(brush);
+		}
+	}
+
+
 	public void movement() {
 		long currentTime = System.currentTimeMillis();
 		
@@ -72,53 +94,61 @@ public class Playable extends Polygon implements KeyListener{
         bullets.add(bullet);
     }
 	
+	@Override
     public void keyPressed(KeyEvent e) {
-//        if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-//            shoot();
-//        }
-        switch (e.getKeyCode()) {
-        	case KeyEvent.VK_W -> up = true;
-        	case KeyEvent.VK_S -> down = true;
-        	case KeyEvent.VK_A -> left = true;
-        	case KeyEvent.VK_D -> right = true;
-        	case KeyEvent.VK_UP -> rotation = 90;
-        	case KeyEvent.VK_DOWN -> rotation = 270;
-        	case KeyEvent.VK_LEFT -> rotation = 180;
-        	case KeyEvent.VK_RIGHT -> rotation = 0;
-        	case KeyEvent.VK_SPACE -> shoot();
-        }
+		switch (e.getKeyCode()) {
+			case KeyEvent.VK_W:
+				up = true;
+				break;
+			case KeyEvent.VK_S:
+				down = true;
+				break;
+			case KeyEvent.VK_A:
+				left = true;
+				break;
+			case KeyEvent.VK_D:
+				right = true;
+				break;
+			case KeyEvent.VK_UP:
+				rotation = 90;
+				break;
+			case KeyEvent.VK_DOWN:
+				rotation = 270;
+				break;
+			case KeyEvent.VK_LEFT:
+				rotation = 180;
+				break;
+			case KeyEvent.VK_RIGHT:
+				rotation = 0;
+				break;
+			case KeyEvent.VK_SPACE:
+				shoot();
+				break;
+		}
     }
 
-    public void keyReleased(KeyEvent e) {
-        switch (e.getKeyCode()) {
-        	case KeyEvent.VK_W -> up = false;
-        	case KeyEvent.VK_S -> down = false;
-        	case KeyEvent.VK_A -> left = false;
-        	case KeyEvent.VK_D -> right = false;
-        }
-    }
-
-    public void keyTyped(KeyEvent e) {}
-
-	public void paint(Graphics brush) {
-	    brush.setColor(Color.blue);
-	    
-        int[] xPoints = new int[shape.length];
-        int[] yPoints = new int[shape.length];
-        
-        Point[] points = this.getPoints();
-        
-        for (int i = 0; i < shape.length; i++) {
-            xPoints[i] = (int) points[i].x;
-            yPoints[i] = (int) points[i].y;
-        }
-        
-        brush.fillPolygon(xPoints, yPoints, shape.length);
-        brush.drawImage(playerSprite, (int) this.position.x, (int) this.position.y, null);
-		
-        for (Bullet bullet : bullets) {
-            bullet.paint(brush);
-        }
-        
+	@Override
+	public void keyReleased(KeyEvent e) {
+		switch (e.getKeyCode()) {
+			case KeyEvent.VK_W:
+				up = false;
+				break;
+			case KeyEvent.VK_S:
+				down = false;
+				break;
+			case KeyEvent.VK_A:
+				left = false;
+				break;
+			case KeyEvent.VK_D:
+				right = false;
+				break;
+		}
 	}
+
+	
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// You can leave this empty if you don't need it
+	}
+
 }

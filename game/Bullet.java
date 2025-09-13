@@ -16,7 +16,7 @@ public class Bullet extends Polygon {
 		super(inShape, inPosition, inRotation);
 		this.shape = inShape;
 		this.rateMov = rateMov;
-		bulletImage = new ImageIcon("src/images/piskel_bullet.png").getImage();
+		bulletImage = new ImageIcon("src/piskel_bullet.png").getImage();
 	}
 
     public void movement() {

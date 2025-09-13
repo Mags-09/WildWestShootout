@@ -31,7 +31,7 @@ public class Enemy extends Polygon {
 		this.shape = inShape;
 		this.bullets = new ArrayList<Bullet>();
 		this.rand = new Random();
-		enemySprite = new ImageIcon("src/images/piskel_orc.png").getImage();
+		enemySprite = new ImageIcon("src/piskel_orc.png").getImage();
 	}
 	
 	public void movement() {

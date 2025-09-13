@@ -12,7 +12,7 @@ public class Background {
     private Image bushImage;
     
     public Background() {
-    	bushImage = new ImageIcon("src/images/piskel_bush.png").getImage();
+    	bushImage = new ImageIcon("src/piskel_bushV2.png").getImage();
     }
 
     public void paint(Graphics brush) {
